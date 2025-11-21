@@ -1,0 +1,419 @@
+
+/*
+
+												Notes 
+												
+												
+
+											"Arreys List"
+
+										1.Message
+										2.ReceipList
+										3.Vchledgerlist -
+												|		  -						 	
+												|            -
+												|			----- Nested Arrey-------
+												|				Costegory And Coscenter      
+												|				1.Acccostcentreallocations   
+												|					-2.Acccostcentre
+												|				  -	
+																-
+										4.Allledgerentrieslist
+									
+											
+										 Debit & Credit
+										 
+								-------------Debit-------------------------
+						/ISDEEMEDPOSITIVE Yes------------>(Amount Will Come Deibt)*/
+						/*IPARTYLEDGER Yes------------------> (Amount Will Come Deibt)*/
+						
+							/*---------------Credit---------------------------------
+												
+					 /*ISDEEMEDPOSITIVE Yes------------>(Amount Will Come Credit)*/
+					 /*IPARTYLEDGER Yes------------------> (Amount Will Come Credit)*/		 
+										 
+										
+
+								/*  Insert Collection Object (Open And Close Method)
+								
+								------------Open Method------------------------
+												
+									Insert Collection Object : "Value Name"
+									
+									set Value	: Lable Name	: Pest (Variable storage)
+									set Value	: Lable Name	: Pest (Variable storage)
+									set Value	: Lable Name	: Pest (Variable storage)
+									set Value	: Lable Name	: Pest (Variable storage)
+									
+								-------------Close Method---------------------- 
+											
+										  Set Target:..		
+										  
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+												If Conditions
+										
+					*********************************** If Condition Open Menthod ******************************************					
+										
+					1.If :  ($$IsInternetActive)  ---------- [Networke]    					
+										  
+					2.	If : NOT $$IsEmpty:$$LicenseInfo:SerialNumber--[LicenseInfo]	
+					
+					3.		if : Download Bor ------------->[%%%%]
+							
+					4.			if : TallyCode ="111888" ----------[Check Tally Code]------>[LOG................]
+							
+					5.				if : Party Name ------------------[Check The Party Name]--->[LOG...............]
+									
+					6.					if : Ledger Name--------------------[Check The Party Ledger Name]-->[LOG........]
+									
+					7.						if : Import----------------------->[Imported Successfully]
+									
+					8.							if : Check Voucher Number----------[LOG...................]
+					
+					
+									
+					****************************************  Close End If **********************************************
+					
+					
+									
+					00:								End If ---[Check Voucher Number]				
+									
+					01: 					 	End If -----[Imported Successfully]								
+									
+					02:						 End If---[Ledger Name]
+									
+					03:				 	End If---[Party Name]
+									
+					04:				 End If ---[TallyCode ="111888"]
+							
+					05:			 End If ---[Download Bor%%%%]
+							
+					06:		 End If -----[LicenseInfo]
+					
+					07: End If ----[Networke]
+						
+										  
+										  
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+									[How To Get Json Tag.Fallow The Steps]
+
+/*
+				1.CashReceipt Json 
+				
+				2.Xml To Json Convert  Link---->https://jsonformatter.org/xml-to-json
+				
+				3.Check Json Validator Link---->https://jsonformatter.curiousconcept.com/# 
+				
+				4.Check The Bottom --------> Json Tag There
+				
+********************************  XML Tag **********************************************************************************************************************************				
+
+
+				<ENVELOPE>
+				<HEADER>
+				<TALLYREQUEST>Import Data</TALLYREQUEST>
+				</HEADER>
+				<BODY>
+				<IMPORTDATA>
+				<REQUESTDESC>
+					<REPORTNAME>Vouchers</REPORTNAME>
+					<STATICVARIABLES>
+					<SVCURRENTCOMPANY>Esaf Hospital &amp; Research Centre - (2021-2022)</SVCURRENTCOMPANY>
+					</STATICVARIABLES>
+				</REQUESTDESC>
+				<REQUESTDATA>
+					<TALLYMESSAGE xmlns:UDF="TallyUDF">
+					<VOUCHER REMOTEID="dfda92e0-ec3f-11db-a29e-9c33ada8844b-00000000" VCHKEY="dfda92e0-ec3f-11db-a29e-9c33ada8844b-0000b36a:00000000" VCHTYPE="Cash Receipt" ACTION="Create" OBJVIEW="Accounting Voucher View">
+					<DATE>20251001</DATE>
+					<GUID>dfda92e0-ec3f-11db-a29e-9c33ada8844b-00000000</GUID>
+					<NARRATION>Being unpaid medical bill received from Nursing staff Krishnakumari T</NARRATION>
+					<VOUCHERTYPENAME>Cash Receipt</VOUCHERTYPENAME>
+					<CLASSNAME>&#4; Not Applicable</CLASSNAME>
+					<GSTREGISTRATION>Kerala Registration</GSTREGISTRATION>
+					<CMPGSTIN>32AAATE0412G1ZK</CMPGSTIN>
+					<VOUCHERNUMBER>609</VOUCHERNUMBER>
+					<CMPGSTREGISTRATIONTYPE>Regular</CMPGSTREGISTRATIONTYPE>
+					<CMPGSTSTATE>Kerala</CMPGSTSTATE>
+					<NUMBERINGSTYLE>Auto Renumber</NUMBERINGSTYLE>
+					<CSTFORMISSUETYPE>&#4; Not Applicable</CSTFORMISSUETYPE>
+					<CSTFORMRECVTYPE>&#4; Not Applicable</CSTFORMRECVTYPE>
+					<PERSISTEDVIEW>Accounting Voucher View</PERSISTEDVIEW>
+					<VCHSTATUSTAXADJUSTMENT>Default</VCHSTATUSTAXADJUSTMENT>
+					<VCHSTATUSVOUCHERTYPE>Default</VCHSTATUSVOUCHERTYPE>
+					<VCHSTATUSTAXUNIT>Default</VCHSTATUSTAXUNIT>
+					<VCHGSTCLASS>&#4; Not Applicable</VCHGSTCLASS>
+					<DIFFACTUALQTY>Yes</DIFFACTUALQTY>
+					<ISDELETED>No</ISDELETED>
+					<ASORIGINAL>No</ASORIGINAL>
+					<FORJOBCOSTING>No</FORJOBCOSTING>
+					<ISOPTIONAL>No</ISOPTIONAL>
+					<EFFECTIVEDATE>20251001</EFFECTIVEDATE>
+					<USEFOREXCISE>No</USEFOREXCISE>
+					<USEFORINTEREST>No</USEFORINTEREST>
+					<USEFORGAINLOSS>No</USEFORGAINLOSS>
+					<USEFORGODOWNTRANSFER>No</USEFORGODOWNTRANSFER>
+					<USEFORCOMPOUND>No</USEFORCOMPOUND>
+					<USEFORSERVICETAX>No</USEFORSERVICETAX>
+					<ISCANCELLED>No</ISCANCELLED>
+					<ISONHOLD>No</ISONHOLD>
+					<CMPGSTISOTHTERRITORYASSESSEE>No</CMPGSTISOTHTERRITORYASSESSEE>
+					<IGNOREGSTCONFLICTINMIG>No</IGNOREGSTCONFLICTINMIG>
+					<ISELIGIBLEFORITC>Yes</ISELIGIBLEFORITC>
+					<EXCISETAXOVERRIDE>No</EXCISETAXOVERRIDE>
+					<ISEXER1NOPOVERWRITE>No</ISEXER1NOPOVERWRITE>
+					<ISEXF2NOPOVERWRITE>No</ISEXF2NOPOVERWRITE>
+					<ISEXER3NOPOVERWRITE>No</ISEXER3NOPOVERWRITE>
+					<ISTDSOVERRIDDEN>No</ISTDSOVERRIDDEN>
+					<ISTCSOVERRIDDEN>No</ISTCSOVERRIDDEN>
+					<ISVATOVERRIDDEN>No</ISVATOVERRIDDEN>
+					<ISVATRESTAXINV>No</ISVATRESTAXINV>
+					<ISSERVICETAXOVERRIDDEN>No</ISSERVICETAXOVERRIDDEN>
+					<ISEXCISEOVERRIDDEN>No</ISEXCISEOVERRIDDEN>
+					<VCHSTATUSISVCHNUMUSED>No</VCHSTATUSISVCHNUMUSED>
+					<VCHGSTSTATUSISINCLUDED>No</VCHGSTSTATUSISINCLUDED>
+					<VCHGSTSTATUSISUNCERTAIN>No</VCHGSTSTATUSISUNCERTAIN>
+					<VCHGSTSTATUSISEXCLUDED>No</VCHGSTSTATUSISEXCLUDED>
+					<VCHGSTSTATUSISAPPLICABLE>No</VCHGSTSTATUSISAPPLICABLE>
+					<VCHGSTSTATUSISGSTR2BRECONCILED>No</VCHGSTSTATUSISGSTR2BRECONCILED>
+					<VCHGSTSTATUSISGSTR2BONLYINPORTAL>No</VCHGSTSTATUSISGSTR2BONLYINPORTAL>
+					<VCHGSTSTATUSISGSTR2BONLYINBOOKS>No</VCHGSTSTATUSISGSTR2BONLYINBOOKS>
+					<VCHGSTSTATUSISGSTR2BMISMATCH>No</VCHGSTSTATUSISGSTR2BMISMATCH>
+					<VCHGSTSTATUSISGSTR2BINDIFFPERIOD>No</VCHGSTSTATUSISGSTR2BINDIFFPERIOD>
+					<VCHGSTSTATUSISRETEFFDATEOVERRDN>No</VCHGSTSTATUSISRETEFFDATEOVERRDN>
+					<VCHGSTSTATUSISOVERRDN>No</VCHGSTSTATUSISOVERRDN>
+					<VCHGSTSTATUSISSTATINDIFFDATE>No</VCHGSTSTATUSISSTATINDIFFDATE>
+					<VCHGSTSTATUSISRETINDIFFDATE>No</VCHGSTSTATUSISRETINDIFFDATE>
+					<VCHGSTSTATUSMAINSECTIONEXCLUDED>No</VCHGSTSTATUSMAINSECTIONEXCLUDED>
+					<VCHGSTSTATUSISBRANCHTRANSFEROUT>No</VCHGSTSTATUSISBRANCHTRANSFEROUT>
+					<VCHGSTSTATUSISSYSTEMSUMMARY>No</VCHGSTSTATUSISSYSTEMSUMMARY>
+					<VCHSTATUSISUNREGISTEREDRCM>No</VCHSTATUSISUNREGISTEREDRCM>
+					<VCHSTATUSISOPTIONAL>No</VCHSTATUSISOPTIONAL>
+					<VCHSTATUSISCANCELLED>No</VCHSTATUSISCANCELLED>
+					<VCHSTATUSISDELETED>No</VCHSTATUSISDELETED>
+					<VCHSTATUSISOPENINGBALANCE>No</VCHSTATUSISOPENINGBALANCE>
+					<VCHSTATUSISFETCHEDONLY>No</VCHSTATUSISFETCHEDONLY>
+					<VCHGSTSTATUSISOPTIONALUNCERTAIN>No</VCHGSTSTATUSISOPTIONALUNCERTAIN>
+					<VCHSTATUSISREACCEPTFORHSNDONE>No</VCHSTATUSISREACCEPTFORHSNDONE>
+					<VCHSTATUSISREACCEPHSNSIXONEDONE>No</VCHSTATUSISREACCEPHSNSIXONEDONE>
+					<HASCASHFLOW>No</HASCASHFLOW>
+					<ISPOSTDATED>No</ISPOSTDATED>
+					<USETRACKINGNUMBER>No</USETRACKINGNUMBER>
+					<ISINVOICE>No</ISINVOICE>
+					<MFGJOURNAL>No</MFGJOURNAL>
+					<HASDISCOUNTS>No</HASDISCOUNTS>
+					<ASPAYSLIP>No</ASPAYSLIP>
+					<ISCOSTCENTRE>No</ISCOSTCENTRE>
+					<ISSTXNONREALIZEDVCH>No</ISSTXNONREALIZEDVCH>
+					<ISVOID>No</ISVOID>
+					<ORDERLINESTATUS>No</ORDERLINESTATUS>
+					<ISVATDUTYPAID>Yes</ISVATDUTYPAID>
+					<ISDELETEDVCHRETAINED>No</ISDELETEDVCHRETAINED>
+					<VOUCHERNUMBERSERIES>Default</VOUCHERNUMBERSERIES>
+					<EWAYBILLDETAILS.LIST>      </EWAYBILLDETAILS.LIST>
+					<EXCLUDEDTAXATIONS.LIST>      </EXCLUDEDTAXATIONS.LIST>
+					<OLDAUDITENTRIES.LIST>      </OLDAUDITENTRIES.LIST>
+					<ACCOUNTAUDITENTRIES.LIST>      </ACCOUNTAUDITENTRIES.LIST>
+					<AUDITENTRIES.LIST>      </AUDITENTRIES.LIST>
+					<DUTYHEADDETAILS.LIST>      </DUTYHEADDETAILS.LIST>
+					<GSTADVADJDETAILS.LIST>      </GSTADVADJDETAILS.LIST>
+					<CONTRITRANS.LIST>      </CONTRITRANS.LIST>
+					<EWAYBILLERRORLIST.LIST>      </EWAYBILLERRORLIST.LIST>
+					<IRNERRORLIST.LIST>      </IRNERRORLIST.LIST>
+					<HARYANAVAT.LIST>      </HARYANAVAT.LIST>
+					<SUPPLEMENTARYDUTYHEADDETAILS.LIST>      </SUPPLEMENTARYDUTYHEADDETAILS.LIST>
+					<INVOICEDELNOTES.LIST>      </INVOICEDELNOTES.LIST>
+					<INVOICEORDERLIST.LIST>      </INVOICEORDERLIST.LIST>
+					<INVOICEINDENTLIST.LIST>      </INVOICEINDENTLIST.LIST>
+					<ATTENDANCEENTRIES.LIST>      </ATTENDANCEENTRIES.LIST>
+					<ORIGINVOICEDETAILS.LIST>      </ORIGINVOICEDETAILS.LIST>
+					<INVOICEEXPORTLIST.LIST>      </INVOICEEXPORTLIST.LIST>
+					<ALLLEDGERENTRIES.LIST>
+					<APPROPRIATEFOR>&#4; Not Applicable</APPROPRIATEFOR>
+					<LEDGERNAME>SUNDRY DEBTORS</LEDGERNAME>
+					<VOUCHERFBTCATEGORY>&#4; Not Applicable</VOUCHERFBTCATEGORY>
+					<GSTCLASS>&#4; Not Applicable</GSTCLASS>
+					<ISDEEMEDPOSITIVE>No</ISDEEMEDPOSITIVE>
+					<LEDGERFROMITEM>No</LEDGERFROMITEM>
+					<ISPARTYLEDGER>No</ISPARTYLEDGER>
+					<ISLASTDEEMEDPOSITIVE>No</ISLASTDEEMEDPOSITIVE>
+					<ISCAPVATNOTCLAIMED>No</ISCAPVATNOTCLAIMED>
+					<AMOUNT>188.00</AMOUNT>
+					<VATEXPAMOUNT>188.00</VATEXPAMOUNT>
+					<CURRPARTYLEDGERNAME>&#4; Not Applicable</CURRPARTYLEDGERNAME>
+					<TEMPPREVLEDGERNAME>SUNDRY DEBTORS</TEMPPREVLEDGERNAME>
+					<TEMPPREVINCLLEDNAME>SUNDRY DEBTORS</TEMPPREVINCLLEDNAME>
+					<SERVICETAXDETAILS.LIST>       </SERVICETAXDETAILS.LIST>
+					<CATEGORYALLOCATIONS.LIST>
+						<CATEGORY>INCOME CENTRES</CATEGORY>
+						<ISDEEMEDPOSITIVE>No</ISDEEMEDPOSITIVE>
+						<COSTCENTREALLOCATIONS.LIST>
+						<NAME>Krishnakumari T</NAME>
+						<AMOUNT>188.00</AMOUNT>
+						</COSTCENTREALLOCATIONS.LIST>
+					</CATEGORYALLOCATIONS.LIST>
+					<BANKALLOCATIONS.LIST>       </BANKALLOCATIONS.LIST>
+					<BILLALLOCATIONS.LIST>       </BILLALLOCATIONS.LIST>
+					<INTERESTCOLLECTION.LIST>       </INTERESTCOLLECTION.LIST>
+					<OLDAUDITENTRIES.LIST>       </OLDAUDITENTRIES.LIST>
+					<ACCOUNTAUDITENTRIES.LIST>       </ACCOUNTAUDITENTRIES.LIST>
+					<AUDITENTRIES.LIST>       </AUDITENTRIES.LIST>
+					<INPUTCRALLOCS.LIST>       </INPUTCRALLOCS.LIST>
+					<INVENTORYALLOCATIONS.LIST>       </INVENTORYALLOCATIONS.LIST>
+					<DUTYHEADDETAILS.LIST>       </DUTYHEADDETAILS.LIST>
+					<EXCISEDUTYHEADDETAILS.LIST>       </EXCISEDUTYHEADDETAILS.LIST>
+					<RATEDETAILS.LIST>       </RATEDETAILS.LIST>
+					<SUMMARYALLOCS.LIST>       </SUMMARYALLOCS.LIST>
+					<CENVATDUTYALLOCATIONS.LIST>       </CENVATDUTYALLOCATIONS.LIST>
+					<STPYMTDETAILS.LIST>       </STPYMTDETAILS.LIST>
+					<EXCISEPAYMENTALLOCATIONS.LIST>       </EXCISEPAYMENTALLOCATIONS.LIST>
+					<TAXBILLALLOCATIONS.LIST>       </TAXBILLALLOCATIONS.LIST>
+					<TAXOBJECTALLOCATIONS.LIST>       </TAXOBJECTALLOCATIONS.LIST>
+					<TDSEXPENSEALLOCATIONS.LIST>       </TDSEXPENSEALLOCATIONS.LIST>
+					<VATSTATUTORYDETAILS.LIST>       </VATSTATUTORYDETAILS.LIST>
+					<REFVOUCHERDETAILS.LIST>       </REFVOUCHERDETAILS.LIST>
+					<INVOICEWISEDETAILS.LIST>       </INVOICEWISEDETAILS.LIST>
+					<VATITCDETAILS.LIST>       </VATITCDETAILS.LIST>
+					<ADVANCETAXDETAILS.LIST>       </ADVANCETAXDETAILS.LIST>
+					<TAXTYPEALLOCATIONS.LIST>       </TAXTYPEALLOCATIONS.LIST>
+					</ALLLEDGERENTRIES.LIST>    //Hemachandran
+					<ALLLEDGERENTRIES.LIST>
+					<APPROPRIATEFOR>&#4; Not Applicable</APPROPRIATEFOR>
+					<LEDGERNAME>Cash</LEDGERNAME>
+					<VOUCHERFBTCATEGORY>&#4; Not Applicable</VOUCHERFBTCATEGORY>
+					<GSTCLASS>&#4; Not Applicable</GSTCLASS>
+					<ISDEEMEDPOSITIVE>Yes</ISDEEMEDPOSITIVE>
+					<LEDGERFROMITEM>No</LEDGERFROMITEM>
+					<ISPARTYLEDGER>No</ISPARTYLEDGER>
+					<ISLASTDEEMEDPOSITIVE>Yes</ISLASTDEEMEDPOSITIVE>
+					<ISCAPVATNOTCLAIMED>No</ISCAPVATNOTCLAIMED>
+					<AMOUNT>-188.00</AMOUNT>
+					<VATEXPAMOUNT>-188.00</VATEXPAMOUNT>
+					<CURRPARTYLEDGERNAME>Cash</CURRPARTYLEDGERNAME>
+					<TEMPPREVLEDGERNAME>Cash</TEMPPREVLEDGERNAME>
+					<TEMPPREVINCLLEDNAME>Cash</TEMPPREVINCLLEDNAME>
+					<SERVICETAXDETAILS.LIST>       </SERVICETAXDETAILS.LIST>
+					<CATEGORYALLOCATIONS.LIST>       </CATEGORYALLOCATIONS.LIST>
+					<BANKALLOCATIONS.LIST>       </BANKALLOCATIONS.LIST>
+					<BILLALLOCATIONS.LIST>       </BILLALLOCATIONS.LIST>
+					<INTERESTCOLLECTION.LIST>       </INTERESTCOLLECTION.LIST>
+					<OLDAUDITENTRIES.LIST>       </OLDAUDITENTRIES.LIST>
+					<ACCOUNTAUDITENTRIES.LIST>       </ACCOUNTAUDITENTRIES.LIST>
+					<AUDITENTRIES.LIST>       </AUDITENTRIES.LIST>
+					<INPUTCRALLOCS.LIST>       </INPUTCRALLOCS.LIST>
+					<INVENTORYALLOCATIONS.LIST>       </INVENTORYALLOCATIONS.LIST>
+					<DUTYHEADDETAILS.LIST>       </DUTYHEADDETAILS.LIST>
+					<EXCISEDUTYHEADDETAILS.LIST>       </EXCISEDUTYHEADDETAILS.LIST>
+					<RATEDETAILS.LIST>       </RATEDETAILS.LIST>
+					<SUMMARYALLOCS.LIST>       </SUMMARYALLOCS.LIST>
+					<CENVATDUTYALLOCATIONS.LIST>       </CENVATDUTYALLOCATIONS.LIST>
+					<STPYMTDETAILS.LIST>       </STPYMTDETAILS.LIST>
+					<EXCISEPAYMENTALLOCATIONS.LIST>       </EXCISEPAYMENTALLOCATIONS.LIST>
+					<TAXBILLALLOCATIONS.LIST>       </TAXBILLALLOCATIONS.LIST>
+					<TAXOBJECTALLOCATIONS.LIST>       </TAXOBJECTALLOCATIONS.LIST>
+					<TDSEXPENSEALLOCATIONS.LIST>       </TDSEXPENSEALLOCATIONS.LIST>
+					<VATSTATUTORYDETAILS.LIST>       </VATSTATUTORYDETAILS.LIST>
+					<REFVOUCHERDETAILS.LIST>       </REFVOUCHERDETAILS.LIST>
+					<INVOICEWISEDETAILS.LIST>       </INVOICEWISEDETAILS.LIST>
+					<VATITCDETAILS.LIST>       </VATITCDETAILS.LIST>
+					<ADVANCETAXDETAILS.LIST>       </ADVANCETAXDETAILS.LIST>
+					<TAXTYPEALLOCATIONS.LIST>       </TAXTYPEALLOCATIONS.LIST>
+					</ALLLEDGERENTRIES.LIST>
+					<CONTRIBUTEDVCHENTRIES.LIST>      </CONTRIBUTEDVCHENTRIES.LIST>
+					<VCHLEDTOTALTREE.LIST>      </VCHLEDTOTALTREE.LIST>
+					<GST.LIST>      </GST.LIST>
+					<STKJRNLADDLCOSTDETAILS.LIST>      </STKJRNLADDLCOSTDETAILS.LIST>
+					<PAYROLLMODEOFPAYMENT.LIST>      </PAYROLLMODEOFPAYMENT.LIST>
+					<ATTDRECORDS.LIST>      </ATTDRECORDS.LIST>
+					<GSTEWAYCONSIGNORADDRESS.LIST>      </GSTEWAYCONSIGNORADDRESS.LIST>
+					<GSTEWAYCONSIGNEEADDRESS.LIST>      </GSTEWAYCONSIGNEEADDRESS.LIST>
+					<TEMPGSTRATEDETAILS.LIST>      </TEMPGSTRATEDETAILS.LIST>
+					<TEMPGSTADVADJUSTED.LIST>      </TEMPGSTADVADJUSTED.LIST>
+					<GSTBUYERADDRESS.LIST>      </GSTBUYERADDRESS.LIST>
+					<GSTCONSIGNEEADDRESS.LIST>      </GSTCONSIGNEEADDRESS.LIST>
+					</VOUCHER>
+					</TALLYMESSAGE>
+					<TALLYMESSAGE xmlns:UDF="TallyUDF">
+					<COMPANY>
+					<REMOTECMPINFO.LIST MERGE="Yes">
+					<NAME>dfda92e0-ec3f-11db-a29e-9c33ada8844b</NAME>
+					<REMOTECMPNAME>Esaf Hospital &amp; Research Centre - (2021-2022)</REMOTECMPNAME>
+					<REMOTECMPSTATE>Kerala</REMOTECMPSTATE>
+					</REMOTECMPINFO.LIST>
+					</COMPANY>
+					</TALLYMESSAGE>
+					<TALLYMESSAGE xmlns:UDF="TallyUDF">
+					<COMPANY>
+					<REMOTECMPINFO.LIST MERGE="Yes">
+					<NAME>dfda92e0-ec3f-11db-a29e-9c33ada8844b</NAME>
+					<REMOTECMPNAME>Esaf Hospital &amp; Research Centre - (2021-2022)</REMOTECMPNAME>
+					<REMOTECMPSTATE>Kerala</REMOTECMPSTATE>
+					</REMOTECMPINFO.LIST>
+					</COMPANY>
+					</TALLYMESSAGE>
+					</REQUESTDATA>
+					</IMPORTDATA>
+					</BODY>
+					</ENVELOPE>
+				
+
+
+******************************** Json Tag *********************************************************************************************************************
+
+				{
+					"message":{
+						"tallycode":"111888",
+						"tallyname":"esaf hospital research centre - (2021-2022)",
+						"tallyserialno":"",
+						"Paymentguid":"",
+						"ipaddress":"",
+						"systemname":"",
+						"createduser":"",
+						"requesttype":"cash receipt",
+						"date":"01/09/2025",
+						"ReceiptList":[
+							{
+								"invoicenumber":"1",
+								"invoicedate":"01/09/2025",
+								"narration":"Being unpaid medical bill received from Nursing staff Krishnakumari T",
+								"partyname":"Sundry Debtors",
+								"vchtype":"Cash Receipt",
+								"invoicemode":"Accounting Voucher View",
+								"subvalue":"",
+								"roundoffledger":"",
+								"roundoffamount":"",
+								"invoicevalue":"",
+								"vchledgerlist":[
+								{
+									"invoicenumber":"100",
+									"additionalledger":"Sundry Debtors",
+									"parent":"Cash-in-Hand",
+									"rateofpercentage":"",
+									"additionalledgervalue":"188.00",
+									"acccostcentreallocations":[
+										{
+											"cccategory":"INCOME CENTER",
+											"acccostcentre":[
+											{
+												"ccname":"krishnakumari t",
+												"ccamount":"188.00"
+											}
+											]
+										}
+									]
+								}
+								],		
+								"allledgerentrieslist":[
+								{
+									"ledgername":"cash",
+									"amount":"188.00",
+									"vatexpamount":"188.00",
+									"categoryamount":"188.00"
+								}
+								]
+							}
+						]
+					}
+					}

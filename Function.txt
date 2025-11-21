@@ -1,0 +1,460 @@
+		 
+								
+/*===================================================== Function =================================================================*/						
+								
+
+		[Function:ImportCashReceipt]        
+			
+	   /*05:Msg Box	: "Hello"	: "HemaVirat18"*/
+		
+/*=========================================================Variable=================================================================*/
+
+
+								/*message "Arrey"*/
+										
+
+				variable	: message_cashreceipt_tallycode					: string	
+				variable	: message_cashreceipt_tallyname		        	: string
+				variable	: message_cashreceipt_tallyserialno	        	: string
+				variable	: message_cashreceipt_Paymentguid	            : string
+				variable	: message_cashreceipt_ipaddress		        	: string
+				variable	: message_cashreceipt_systemname	            : string
+				variable	: message_cashreceipt_createduser	            : string
+				variable	: message_cashreceipt_requesttype	            : string
+				Variable	: message_cashreceipt_date						: String
+				variable	: message_cashreceipt_ReceiptList	            : string
+				
+								/*ReceiptList Arrey */
+
+				
+				variable	: receiptlisr_cashreceipt_invoicenumber			: string
+				variable	: receiptlisr_cashreceipt_invoicedate       	: string		
+				variable	: receiptlisr_cashreceipt_narration         	: string
+				variable	: receiptlisr_cashreceipt_partyname      		: string
+				variable	: receiptlisr_cashreceipt_vchtype           	: string
+				variable	: receiptlisr_cashreceipt_invoicemode       	: string
+				variable	: receiptlisr_cashreceipt_subvalue          	: string
+				variable	: receiptlisr_cashreceipt_roundoffledger    	: string	
+				variable	: receiptlisr_cashreceipt_roundoffamount    	: string
+				variable	: receiptlisr_cashreceipt_invoicevalue      	: string
+				
+
+										/*vchledgerlist (Arrey)*/
+										
+
+				variable	: vchledgerlist_cashreceipt_invoicenumber			: string
+				variable	: vchledgerlist_cashreceipt_additionalledger    	: string
+				variable	: vchledgerlist_cashreceipt_parent        			: string
+				variable	: vchledgerlist_cashreceipt_rateofpercentage    	: string
+				Variable	: vchledgerlist_cashreceipt_transaction_type		: String
+				variable	: vchledgerlist_cashreceipt_additionalledgervalue   : string
+				
+									/*allledgerentrieslist(Arrey)*/
+									
+
+
+				variable	:  allederlist_cashreceipt_ledgername				  :	string
+				variable	:  allederlist_cashreceipt_amount                     :	string
+				variable	:  allederlist_cashreceipt_vatexpamount               :	string
+				variable	:  allederlist_cashreceipt_tempprevledgername         :	string
+				variable	:  allederlist_cashreceipt_category                   :	string
+				variable	:  allederlist_cashreceipt_name                       :	string
+				variable	:  allederlist_cashreceipt_categoryamout              :	string
+				
+								/*acccostcentreallocations(Nested Arrey)*/
+								
+				Variable	: acccostcentreallocations_cashreceipt_cccategory	  : String
+				
+				
+								/*acccostcentre(Nested Arrey)*/
+								
+			   Variable		: acccostcentre_cashreceipt_ccname					  : string
+			   variable		: acccostcentre_cashreceipt_ccamount                  : string
+																				  
+
+				
+/*==========================================================================================================================================*/
+			   
+			   Variable		:  Check_CashReceipt_VoucherNo	                 	  : String
+			   Variable		:  Download_CashReceipt_ledger			         	  : String
+			  
+/*================================================  Vch Count =============================================================================*/
+
+			   Variable		: ProgressCounte								 	  : Number
+			   Variable		: TotalCashreceipt								 	  : Number:1
+			   
+/*==================================================== Show Progress  ==============================================================================*/
+
+				Variable	: esafNumberOfcashreceipt							  : Number
+				Variable	: NumberOfcashreceiptsecount						  : Number	: 0
+				
+				List Variable		: CommonVariable_Update_CashReceipt
+				
+/*===================================================================================================================================================  */
+			
+			
+			
+			10 : SET : ProgressCounte : 1
+			
+			20 : If : (##TotalCashreceipt > 0)       
+			
+			30 : If :  ($$IsInternetActive)    
+			
+			40 : If : NOT $$IsEmpty:$$LicenseInfo:SerialNumber
+			
+		
+/*=============================================== Report=================================================================================================*/
+					
+			61		: Alter : Cashreceipt_Report /*---------------- Display(Before)--------> Corration(After) ----------"Alter"*/
+			
+/*==========================================================================================================================================================*/
+			
+			62		: Query Box	: "Do you want to \n Download CashReceipt ":Yes:No
+				
+/*=====================================================*Walk Collection =========================================================================================*/
+													/*CashReceiptVoucher
+				
+												message*/
+		100: Walk Collection	: CashReceiptVoucher 
+		110: Walk Collection	: message				
+		
+		120		: set	:	message_cashreceipt_tallycode				: $$localestring:$tallycode						
+		130		: set   :   message_cashreceipt_tallyname		        : $$localestring:$tallyname		
+		140		: Set   :   message_cashreceipt_tallyserialno		    : $$localestring:$tallyserialno	
+		150		: set   :   message_cashreceipt_Paymentguid	            : $$localestring:$Paymentguid	
+		160		: set   :   message_cashreceipt_ipaddress		        : $$localestring:$ipaddress		
+		170		: set   :   message_cashreceipt_systemname	            : $$localestring:$systemname	
+		180		: set   :   message_cashreceipt_createduser	            : $$localestring:$createduser	
+		190		: set   :   message_cashreceipt_requesttype	            : $$localestring:$requesttype
+		195		: Set	: 	message_cashreceipt_date					: $$LocaleString:$date
+		196		: set   :   message_cashreceipt_ReceiptList	            : $$localestring:$ReceiptList
+		
+		197		: If	:	##message_cashreceipt_tallycode="111888";$VIMCompanyCode:Company:##SVCurrentCompany /*Corract If Condition ---- Company< ----- After-------Code---Check Tally Code*/
+		
+			/* If	:	##message_cashreceipt_tallycode="111888";$VIMCompanyCode:Company:##SVCurrentCompany ------Before-- Wrong Method--*/
+			
+/*=============================================== Passantage Count ============================================================================================*/	
+		
+		202		: Set	: 	esafNumberOfcashreceipt	 :$$NumItems:ReceiptList /*Enter A Voucher Type Name*/
+			
+		203		: If	: 	##esafNumberOfcashreceipt>0
+		
+		204		: Start Progress:##esafNumberOfcashreceipt : "Cash Receipt Voucher Import"	: @@CmpMailName : "Importing Cash Receipt Voucher..."
+		
+		205		: End If /* ##esafNumberOfcashreceipt>0 */
+			
+;=====================================================ReceiptList Arrey ======================================================================================*
+														/*Walkcollecation*/
+														
+		300: walk collection	: ReceiptList
+		301: New Object			: Voucher
+		
+		310		: set	:	receiptlisr_cashreceipt_invoicenumber		: $$localestring:$invoicenumber			
+		320		: set	:	receiptlisr_cashreceipt_invoicedate         : $$localestring:$invoicedate    
+		330		: set	:	receiptlisr_cashreceipt_narration           : $$localestring:$narration
+		335		: Set	:	receiptlisr_cashreceipt_partyname			: $$LocaleString:$partyname
+		350		: set	:	receiptlisr_cashreceipt_vchtype             : $$localestring:$vchtype        
+		360		: set	:	receiptlisr_cashreceipt_invoicemode         : $$localestring:$invoicemode    
+		370		: set	:	receiptlisr_cashreceipt_subvalue            : $$localestring:$subvalue       
+		380		: set	:	receiptlisr_cashreceipt_roundoffledger      : $$localestring:$roundoffledger 
+		390		: set	:	receiptlisr_cashreceipt_roundoffamount      : $$localestring:$roundoffamount 
+		400		: set	:	receiptlisr_cashreceipt_invoicevalue        : $$localestring:$invoicevalue 
+	
+			
+
+		410		: If	:	 (not($$IsEmpty:$Name:Ledger:##receiptlisr_cashreceipt_partyname)) 
+		420		: set 	:	 Check_CashReceipt_VoucherNo:($$CollectionFieldByKey:$VoucherNumber:($$String:##receiptlisr_cashreceipt_invoicenumber+$$String:##receiptlisr_cashreceipt_vchtype):CheckReceiptVchAvailabilit)
+		
+	   421		: If	:  	##Check_CashReceipt_VoucherNo=''
+			
+			
+				
+		460			:	Set	:	SVViewName							 : $$SysName:AcctgVchView						
+		470			:	Set Value	: DATE							 : ##receiptlisr_cashreceipt_invoicedate	
+		480			:	Set Value	: NARRATION			             : $narration
+		500			:	Set Value	: PARTYLEDGERNAME	             : ##receiptlisr_cashreceipt_partyname
+		510			:	Set Value	: PERSISTEDVIEW		             : if ##receiptlisr_cashreceipt_invoicemode = " Inventory View " Then " Invoice Voucher View" Else  " Accounting Voucher View "
+		520			:	Set Value	: IsInvoice			             : Yes
+		530			:	Set Value	: VOUCHERTYPENAME	             : ##receiptlisr_cashreceipt_vchtype
+		550			:	Set Value	: VOUCHERNUMBER		             : ##receiptlisr_cashreceipt_invoicenumber
+		560			:	Set Value	: date				             : ##receiptlisr_cashreceipt_invoicedate
+		570			:	Set Value	: narration			             : ##receiptlisr_cashreceipt_narration
+		590			:	Set Value	: VOUCHERTYPENAME	             : ##receiptlisr_cashreceipt_vchtype 
+		600			:	Set Value	: PERSISTEDVIEW		             : ##receiptlisr_cashreceipt_invoicemode
+		640			:	Set Value	: Amount			             : ##receiptlisr_cashreceipt_invoicevalue																	
+																				
+
+		/*=================================================== vchledgerlist=====================================================================*/
+
+		700 : Walk Collection	: vchledgerlist
+		
+		710				:	set 		: vchledgerlist_cashreceipt_invoicenumber			: $$localestring:$invoicenumber						
+		720				:   set 		: vchledgerlist_cashreceipt_additionalledger        : $$localestring:$additionalledger      
+		730				:   set 		: vchledgerlist_cashreceipt_parent        		    : $$localestring:$parent        		  
+		740				:   set 		: vchledgerlist_cashreceipt_rateofpercentage        : $$localestring:$rateofpercentage
+		741				:	Set			: vchledgerlist_cashreceipt_transaction_type		: $$LocaleString:$transaction_type
+		742				:   set 		: vchledgerlist_cashreceipt_additionalledgervalue   : $$localestring:$additionalledgervalue 
+		
+		
+		743				:   If	:     (Not ($$IsEmpty:$Name:Ledger:##vchledgerlist_cashreceipt_additionalledger))   	/*Ledger exists*/ 													
+												/*IsDeemedPositive:No (Amount Will Come Credit)*/							
+
+		743A	   		 :	Insert Collection Object			                            : LEDGERENTRIES;ALLLEDGERENTRIES
+		743B	   		 :	Set Value	: LedgerName			                            : ##vchledgerlist_cashreceipt_additionalledger
+		743C	   		 :	Set Value	: IsDeemedPositive		                            : No /*correction-------IsDeemedPositive : No--------> (Amount Will Come Cridit)*/
+		743D	   		 :	Set Value	: ISLASTDEEMEDPOSITIVE	                            : No /*correction-------ISLASTDEEMEDPOSITIVE---------->(Amount Will Come Cridit)*/
+		743E			 :	Set Value	: Amount				                            : ##vchledgerlist_cashreceipt_additionalledgervalue
+		
+
+		749				: Else	
+					
+        750 			: Set File Log On
+        751 			: OPEN FILE : @@currentdate_LogFile : Text : Write
+        752 			: Write File Line: "---------------------------------------------" 
+        753 			: Write File Line: "["+@@currentDate+" "+$$SysInfo:SystemTimeHMS+"] Error: Yes - Voucher Type: CashReceipt, Voucher Number: "+##receiptlisr_cashreceipt_invoicenumber+", Company Code: "+##message_cashreceipt_tallycode+', Status: "'+##vchledgerlist_cashreceipt_additionalledger+'" Ledger Not Found'
+        754 			: Close Target File
+        755 			: Set File Log Off
+           
+        756				: List Add Ex	: CommonVariable_Update_CashReceipt
+				
+        757				: Set	: CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRNO				: ##receiptlisr_cashreceipt_invoicenumber
+        758				: Set	: CommonVariable_Update_CashReceipt[$$LOOPINDEX].INVOICETYPES		: ##receiptlisr_cashreceipt_vchtype
+        759				: Set	: CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRDATE				: ##receiptlisr_cashreceipt_invoicedate
+        800				: Set	: CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_STATUS	: "Error"
+        801				: Set	: CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_Msg		: ##vchledgerlist_cashreceipt_additionalledger+"Ledger Not Found"
+				
+        802				: End If       /*Ledger exists*/ 
+			
+		761				: Set Value	: VOUCHERNUMBER				: $$TgtObject:##receiptlisr_cashreceipt_invoicenumber
+			
+	/*=======================================================Walk Collection(Nested Arrey)================================================================================================================*/	
+
+		915				: Walk Collection	: acccostcentreallocations
+		
+		917				: Set		: acccostcentreallocations_cashreceipt_cccategory		: $$LocaleString:$cccategory
+		
+		920				: Insert Collection Object		: CATEGORYALLOCATIONS
+		921				: Set Value			: CATEGORY 										: ##acccostcentreallocations_cashreceipt_cccategory
+		923				: Set Value			: ISDEEMEDPOSITIVE 								: Yes
+			
+			
+
+	/*==============================================================sWalk Collection(Nested Arrey)=============================================================================================================================================*/
+			
+		925				: Walk Collection	:  acccostcentre	
+						
+		927				: Set				:  acccostcentre_cashreceipt_ccname			   : $$LocaleString:$ccname	
+		929				: Set				:  acccostcentre_cashreceipt_ccamount		   : $$AsAmount:$$LocaleString:$ccamount
+																						
+		930				:  Insert Collection Object	: COSTCENTREALLOCATIONS                
+		932				:  Set Value		:	NAME									   : ##acccostcentre_cashreceipt_ccname	
+		934				:  Set Value		:	AMOUNT 									   :  $$AsAmount:##acccostcentre_cashreceipt_ccamount	
+		936				:  Set Target:.. /*COSTCENTREALLOCATIONS*/
+			
+
+
+
+		938	: End Walk  				/*acccostcentre*/
+		940	: Set Target:..				/*COSTCENTREALLOCATIONS*/ 
+		942	: End Walk					/*acccostcentreallocations*/
+		945	: Set Target:..				/*ALLLEDGERENTRIES*/
+		1000: End Walk 					/*vchledgerlist*/
+
+		/*===============================================  allledgerentrieslist(Arrey)================================================================================================*/
+
+		1001: Walk Collection	: allledgerentrieslist
+		
+		1002			: set	:  allederlist_cashreceipt_ledgername						: $$localestring:$ledgername				
+		1003			: set	:  allederlist_cashreceipt_amount                           : $$localestring:$amount           
+		1004			: set	:  allederlist_cashreceipt_vatexpamount                     : $$localestring:$vatexpamount     
+		1005			: set	:  allederlist_cashreceipt_tempprevledgername               : $$localestring:$tempprevledgrname 
+		1006			: set	:  allederlist_cashreceipt_category                         : $$localestring:$category         
+		1007			: set	:  allederlist_cashreceipt_name                             : $$localestring:$name             
+		1008			: set	:  allederlist_cashreceipt_categoryamout                    : $$localestring:$categoryamout   
+			
+	/*===================================================================== Debit Amount=========================================================================================================*/																						
+		
+												/*IsDeemedPositive:Yes (Amount Will Come Debit)*/
+		
+		1013  			: Insert Collection Object : ALLLEDGERENTRIES
+		
+		1014 			: Set Value : 	LEDGERNAME 		 									: ##allederlist_cashreceipt_ledgername
+		1015 			: Set Value : 	ISDEEMEDPOSITIVE  									: Yes	 /*ISDEEMEDPOSITIVE Yes------------>(Amount Will Come Deibt)*/
+		1016 			: Set Value : 	ISPARTYLEDGER  										: Yes  /*ISPARTYLEDGER Yes------------------> (Amount Will Come Deibt)*/        
+		1017 			: Set Value : 	AMOUNT 			 									: $$AsAmount:##allederlist_cashreceipt_amount*-1
+				
+		1030 : Set Target : ..
+		
+		
+			
+		1033	: End Walk
+		
+		2000	: Log Target: TEST.Log
+		2001	: Create Target	
+			
+			
+			
+			
+		4003A	: If	: $$LastResult   /*$$LastResult*/
+		
+		4003B	: Set File Log On
+		4003C	: Open File	: @@currentdate_LogFile : Text : Write
+		4003D	: Write File Line: "---------------------------------------------"
+		4003E	: Write File Line:"["+@@currentDate+" "+$$SysInfo:SystemTimeHMS+"] Error: No - Voucher Type: CashReceipt, Voucher Number: "+##receiptlisr_cashreceipt_invoicenumber+", Company Code: "+##message_cashreceipt_tallycode+", Status: Imported Successfully"
+		4003F 	: Close Target File
+		4003G 	: Set File Log Off
+			
+			
+		4004 	: LIST ADD EX :  CommonVariable_Update_CashReceipt
+		4005 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRNO				: ##receiptlisr_cashreceipt_invoicenumber
+		4006 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].INVOICETYPES		: ##receiptlisr_cashreceipt_vchtype
+		4007 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRDATE			: ##receiptlisr_cashreceipt_invoicedate
+		4008 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_STATUS	: "Success"
+		4009 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_Msg	: ""
+			
+			
+		4010	: Else  
+		
+        4011 	: Set File Log On
+        4012 	: OPEN FILE : @@currentdate_LogFile : Text : Write
+        4013 	: Write File Line: "---------------------------------------------"
+        4014A 	: Write File Line: "["+@@currentDate+" "+$$SysInfo:SystemTimeHMS+"] Error: Yes - Voucher Type: CashReceipt, Voucher Number: "+##receiptlisr_cashreceipt_invoicenumber+", Company Code: "+##message_cashreceipt_tallycode+", Status: "+$$LastError
+        4014B 	: Close Target File
+        4015 	: Set File Log Off
+         
+        4016 	: List Add Ex :  CommonVariable_Update_CashReceipt
+        4017 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRNO					: ##receiptlisr_cashreceipt_invoicenumber
+        4018 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].INVOICETYPES			: ##receiptlisr_cashreceipt_vchtype
+        4019 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRDATE				: ##receiptlisr_cashreceipt_invoicedate
+        4020 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_STATUS		: "Error"
+        4021 	: Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_Msg		: $$LastError
+		4022	: End If  /*$$LastResult*/
+		
+
+		4023	: Else
+        
+        4024 	: Set File Log On
+        4025 	: OPEN FILE : @@currentdate_LogFile : Text : Write
+        4026 	: Write File Line: "---------------------------------------------"
+        4027 	: Write File Line: "["+@@currentDate+" "+$$SysInfo:SystemTimeHMS+"] Error: Yes - Voucher Type: CashReceipt, Voucher Number: "+##receiptlisr_cashreceipt_invoicenumber+", Company Code: "+##message_cashreceipt_tallycode+", Status: Invoice Number Already Exist"
+        4028 	: Close Target File
+        4029 	: Set File Log Off
+        
+        4030 	: List Add Ex :  CommonVariable_Update_CashReceipt
+        4031 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRNO				: ##receiptlisr_cashreceipt_invoicenumber
+        4032 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].INVOICETYPES		: ##receiptlisr_cashreceipt_vchtype
+        4033 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRDATE				: ##receiptlisr_cashreceipt_invoicedate
+        4034 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_STATUS	: "Error"
+        4035 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_Msg		: ##Download_TRANS_invoicenumber+" Invoice Number Already Exist" 
+        4036 	: End If /*Voucher not exist*/
+
+
+		4037	: Else
+			
+		4038 	: Set File Log On
+		4040 	: OPEN FILE : @@currentdate_LogFile : Text : Write
+		4041 	: Write File Line: "---------------------------------------------"
+		4042 	: Write File Line: "["+@@currentDate+" "+$$SysInfo:SystemTimeHMS+"] Error: Yes - Voucher Type: CashReceipt, Voucher Number: "+##receiptlisr_cashreceipt_invoicenumber+", Company Code: "+##message_cashreceipt_tallycode+', Status: "'+##receiptlisr_cashreceipt_partyname+ "Party Ledger Not Found"
+		4043 	: Close Target File
+		4044 	: Set File Log Off
+			
+		4090 	: List Add Ex :  CommonVariable_Update_CashReceipt
+		5000 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRNO			: ##receiptlisr_cashreceipt_invoicenumber
+		5010 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].INVOICETYPES	: ##receiptlisr_cashreceipt_vchtype
+		5020 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRDATE			: ##receiptlisr_cashreceipt_invoicedate
+		5030 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_STATUS: "Error"
+		5040 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_Msg	: ##receiptlisr_cashreceipt_partyname+" Party Ledger Not Found "	
+		5050	:  End If /*Not Empty(Party Name)*/
+		
+
+	
+		5060 	: End Walk     /*ReceiptList*/
+			
+			
+		5070	: Increment		: NumberOfcashreceiptsecount
+		5080	: Show Progress	: ##NumberOfcashreceiptsecount
+			
+			
+			
+		6000	: If	: ##esafNumberOfcashreceipt > 0
+		6010	: End Progress
+		6020	: End If	/*##esafNumberOfcashreceipt > 0*/
+
+			
+		8009	: Else /*Check Tally Code*/
+			
+		8010 	: Set File Log On	
+		8020 	: OPEN FILE : @@currentdate_LogFile : Text : Write
+        8030 	: Write File Line: "---------------------------------------------"
+        8040 	: Write File Line: "["+@@currentDate+" "+$$SysInfo:SystemTimeHMS+"] Error: Yes - Voucher Type: CashReceipt, Voucher Number: "+##receiptlisr_cashreceipt_invoicenumber+", Company Code: "+##message_cashreceipt_tallycode+', Status: Company Code Not Found'
+        8050 	: Close Target File
+        8060 	: Set File Log Off
+            
+        8070 	: List Add Ex :  CommonVariable_Update_CashReceipt
+        8080 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRNO				: ##receiptlisr_cashreceipt_invoicenumber
+        8090 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].INVOICETYPES		: ##receiptlisr_cashreceipt_vchtype
+        9000 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].VRDATE				: ##receiptlisr_cashreceipt_invoicedate
+        9010 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_STATUS	: "Error"
+        9020 	:  Set : CommonVariable_Update_CashReceipt[$$LOOPINDEX].APIRESULT_Msg		: "Company Code Not Found"  
+        9030 	: End If /*Check Tally Code*/
+
+		9040	: End Walk	/*message*/
+		9050	: End Walk  /*CashReceiptVoucher*/
+
+
+
+		
+
+
+		12001	:  Else				
+	    12002	:  Msg Box	: "Check"	: "License is not active.\nDownload not allowed!"				
+		12003	:  End If /*NOT $$IsEmpty:LicenseInfo*/
+				
+		12004	:  Else    			
+		12005	:  Msg Box	: "Check"	: "Network unavailable.\nPlease try again later!"			
+		12006	:  End If  /*IsInternetActive  */
+		
+		
+		12008	:  End If     /*TotalCashReceipt*/
+		
+		
+		
+		
+		 
+		
+
+
+
+
+
+
+		[Variable:CommonVariable_Update_CashReceipt]
+
+		Variables:VRNO    				:	String
+		Variables:APIRESULT_Msg			:	String
+		Variables:INVOICETYPES 			:	String
+		Variables:VRDATE    			:	String
+		Variables:APIRESULT_STATUS		:	String
+
+
+		
+
+		/*========================================================================================================================================================================================================*/
+			
+		[Collection : CheckReceiptVchAvailabilit] 
+			
+			Type			: Vouchers	: VoucherType
+			Child Of		: ##receiptlisr_cashreceipt_vchtype
+			Native Method	: VoucherNumber,VoucherTypeName,MasterID
+			Aggr Method		: LastVoucherNumber1  : Last : $VoucherNumber
+			Search Key		: $VoucherNumber+$$String:##receiptlisr_cashreceipt_vchtype
+			
+			
+
+
+			
+			
+	/*================================================================================= End List ==============================================================================================================================*/	
+
+
+    

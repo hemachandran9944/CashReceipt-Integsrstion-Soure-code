@@ -1,0 +1,22 @@
+
+
+
+/**************************************************** Include All File************************************************************************/
+
+
+	[#Field:Default]
+	 
+	ADD:Tooltip:$$DescName
+
+
+[Include:json.txt]
+[Include:status.txt]
+[Include:function.txt]
+[Include:Report.txt]
+[Include:SystemFormulasUDF.txt]
+
+
+/*Notes*/
+
+[Include:CashReceipt integaration Notes.txt]
+

@@ -1,0 +1,123 @@
+/*======================================================Add Menu Part======================================================
+*/
+
+[#Menu:GatewayOfTally]
+	
+
+;Add	: Item	:After: @@locIndentUtilities:"CashReceipt"	: Call:ImportCashReceipt :
+	
+Add	: Key Item	: After	: @@locIndentUtilities	: @@CashReceipt	: R : Menu	: TransCashReceipt 
+
+
+[System:Formula]
+	
+	CashReceipt	: "CashReceipt"
+	CashReceiptAPI	: ReceiptVoucher
+	
+[Menu:TransCashReceipt]
+	
+Indent	: @@CashReceiptAPI
+Title	: $$LocaleString:"Receipt Trancation"
+Key Item: "CashReceipt"	: C : Call:ImportCashReceipt
+
+
+/*__________________________________________ Collection_______________________________________________________________________________
+*/
+
+
+[System:Formula]	
+	
+	CashReceiptRootPath:$$LocaleString:"D:\MazeWork Project\Vishnu Task\Json\CashReceipt Json 3.json"
+
+[Collection: CashReceiptVoucher]
+	
+	Data Source  :	File JSON	:@@CashReceiptRootPath
+	JSON Object  :	CashReceiptVoucher
+	Client Only  :	Yes
+	Fetch        :	.*.
+
+
+[Object: CashReceiptVoucher]
+	
+	Collection	: message		: message
+
+[Object: message]
+	
+					/*	message /Arrey/*/
+						
+	Storage		: 	tallycode					:  string		
+	Storage		: 	tallyname					:  string
+	Storage		: 	tallyserialno				:  string
+	Storage		: 	Paymentguid					:  string
+	Storage		: 	ipaddress					:  string
+	Storage		: 	systemname					:  string
+	Storage		: 	createduser					:  string
+	Storage		: 	requesttype					:  string
+	Storage		:	date						:  String
+	storage     : 	ReceiptList					:  string	
+	
+	Collection	: ReceiptList					:	ReceiptList
+
+[Object: ReceiptList]
+	
+			/*ReceiptList (Arrey)*/
+	
+	storage		:	invoicenumber					:	string
+	storage		:	invoicedate                     :	string
+	storage		:	narration                       :	string
+	storage		:	partyname                    	:	string
+	storage		:	vchtype                         :	string
+	storage		:	invoicemode                     :	string
+	storage		:	subvalue                        :	string
+	storage		:	roundoffledger                  :	string
+	storage		:	roundoffamount                  :	string
+	storage		:	invoicevalue                    :	string
+	
+	
+	Collection	:	vchledgerlist					:	vchledgerlist
+	Collection	:	allledgerentrieslist			:   allledgerentrieslist
+
+[Object : vchledgerlist]
+	
+						/*vchledgerlist (Arrey)*/
+
+	storage		: invoicenumber						:	string					
+	storage		: additionalledger              	:	string
+	storage		: parent        					:	string
+	storage		: rateofpercentage              	:	string
+	storage		: additionalledgervalue         	:	string
+	
+[Object: allledgerentrieslist]
+	
+					/*allledgerentrieslist(Arrey)*/
+
+	storage		: ledgername						:	string	
+	storage		: amount                            :	string
+	storage		: vatexpamount                      :	string
+	storage		: tempprevledgername                :	string
+	storage		: category                          :	string
+	storage		: name                              :	string
+	storage		: categoryamount                    :	string
+
+	Collection : acccostcentreallocations 			: acccostcentreallocations
+	
+[Object: acccostcentreallocations]
+	
+    Storage    : cccategory     					: string
+    Collection : acccostcentre  					: acccostcentre
+
+[Object: acccostcentre]
+	
+    Storage    : ccname    							: string
+    Storage    : ccamount  							: string
+	
+
+
+
+	
+	
+	
+	
+
+	
+	

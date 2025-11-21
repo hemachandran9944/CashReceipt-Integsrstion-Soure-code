@@ -1,0 +1,77 @@
+
+
+
+
+/********************************* (CheckFunction-Line222)***********************************************************************/
+
+
+
+
+
+		[Report: Cashreceipt_Report]
+		
+			Form		: Cashreceipt_Fo
+		
+		[Form:Cashreceipt_Fo]
+			
+			Top Part	: VoucherType_Top_Part
+			Part		: Part_1
+			Width		: 100 % Page
+			Height		: 20 % Page
+			Background	: DarkBlue
+		
+		[Part: VoucherType_Top_Part]
+			
+			Border		: Thin Bottom
+			Line		: VoucherType_Top_Part_L1
+		
+		[Part: Part_1]
+			
+			Line		: Part_1_L1
+		
+		[Line: Part_1_L1]
+			
+			Space Top	: 3 % Page
+			Field		: Part_1_L1_Fi1,Part_1_L1_Fi2
+
+		[Field: Part_1_L1_Fi1]
+		
+			Use			: MediumPrompt
+			Set as		: "ENTER A DATE"
+			Color		: "BLUE"
+			Style		: Large Serif
+
+		[Field	: Part_1_L1_Fi2]
+			
+			Use			: Short Date Field
+			Storage		: VoucherDate   /*Check----->System_Formulas_UDF.Txt----------->Storage*/
+			Width		: 7 % Page
+
+		[Line	: VoucherType_Top_Part_L1]
+			
+			Space Top	: 2%
+			Field		: VoucherType_Top_Part_L1_Fi1
+
+		[Field: VoucherType_Top_Part_L1_Fi1]
+			
+			Info		: "[CashReceipt]"
+			Skip		: Yes
+			Full Width	: Yes
+			Align		: Center	
+			Color		: "Red"
+			Style		: Large Bold
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
